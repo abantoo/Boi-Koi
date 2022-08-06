@@ -1,7 +1,7 @@
 {
-  "name": "nodejs-complete-guide",
+  "name": "boi-koi",
   "version": "1.0.0",
-  "description": "Complete Node.js Guide",
+  "description": "An online book store with ssr",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,16 +10,13 @@
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "nodemon": "^1.19.4"
-  },
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "ejs": "^2.6.1",
-    "express": "^4.16.3",
-    "express-handlebars": "^3.0.0",
-    "mysql2": "^1.6.1",
-    "pug": "^2.0.3",
-    "sequelize": "^5.21.7"
+    "body-parser": "^1.20.0",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "mongodb": "^4.8.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
   }
 }
