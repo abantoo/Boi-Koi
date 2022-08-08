@@ -37,11 +37,11 @@ class Product {
       });
   }
 
-  static findById(title) {
+  static findByID(bookID) {
     const db = getDB();
     return db
       .collection("Books")
-      .find({ _id: bookID })
+      .find({ _id: new mongodb.ObjectId(bookID) })
       .next()
       .then((book) => {
         return book;
