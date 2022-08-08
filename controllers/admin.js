@@ -23,31 +23,31 @@ exports.postAddProduct = (req, res, next) => {
     .catch((err) => console.log(err));
 };
 
-exports.getProducts = (req, res, next) => {
-  const product = new Product();
-  product
-    .findAll()
-    .then((book) => {
-      res.render("admin/products", {
-        prods: books,
-        pageTitle: "Admin Products",
-        path: "/admin/products",
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  // req.user;
-  //   .getProducts()
-  //   .then(products => {
-  //     res.render('admin/products', {
-  //       prods: products,
-  //       pageTitle: 'Admin Products',
-  //       path: '/admin/products'
-  //     });
-  //   })
-  //   .catch(err => console.log(err) );
-};
+// exports.getProducts = (req, res, next) => {
+//   const product = new Product();
+//   product
+//     .findAll()
+//     .then((book) => {
+//       res.render("admin/products", {
+//         prods: books,
+//         pageTitle: "Admin Products",
+//         path: "/admin/products",
+//       });
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// req.user;
+//   .getProducts()
+//   .then(products => {
+//     res.render('admin/products', {
+//       prods: products,
+//       pageTitle: 'Admin Products',
+//       path: '/admin/products'
+//     });
+//   })
+//   .catch(err => console.log(err) );
+// };
 
 // exports.getEditProduct = (req, res, next) => {
 //   const editMode = req.query.edit;
