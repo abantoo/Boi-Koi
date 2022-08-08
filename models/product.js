@@ -35,6 +35,19 @@ class Product {
     }
   }
 
+  static delete(bookID) {
+    const db = getDB();
+    return db
+      .collection("Books")
+      .deleteOne({ _id: new mongodb.ObjectId(bookID) })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   static findAll() {
     const db = getDB();
     return db
@@ -42,7 +55,6 @@ class Product {
       .find()
       .toArray()
       .then((books) => {
-        console.log(books);
         return books;
       })
       .catch((err) => {
