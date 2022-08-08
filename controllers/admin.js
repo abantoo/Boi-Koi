@@ -24,6 +24,19 @@ exports.postAddProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
+  const product = new Product();
+  product
+    .findAll()
+    .then((book) => {
+      res.render("admin/products", {
+        prods: books,
+        pageTitle: "Admin Products",
+        path: "/admin/products",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   // req.user;
   //   .getProducts()
   //   .then(products => {

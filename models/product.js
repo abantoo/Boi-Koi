@@ -20,6 +20,21 @@ class Product {
         console.log(err);
       });
   }
+
+  static findAll() {
+    const db = getDB();
+    return db
+      .collection("Books")
+      .find()
+      .toArray()
+      .then((books) => {
+        console.log(books);
+        return books;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 }
 
 module.exports = Product;
