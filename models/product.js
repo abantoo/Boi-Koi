@@ -2,24 +2,37 @@ const mongodb = require("mongodb");
 const getDB = require("../util/database").getDB;
 
 class Product {
-  constructor(title, price, description, imageUrl) {
+  constructor(title, price, description, imageUrl, _id) {
     this.title = title;
     this.price = price;
     this.description = description;
     this.imageUrl = imageUrl;
+    this._id = id;
   }
 
   save() {
     const db = getDB();
-    return db
-      .collection("Books")
-      .insertOne(this)
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (this._id) {
+      return db
+        .collection("Books")
+        .updateOne({ _id: new mongodb.ObjectId(this._id) }, { $set: this })
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      return db
+        .collection("Books")
+        .insertOne(this)
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   static findAll() {
