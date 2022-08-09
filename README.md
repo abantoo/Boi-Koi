@@ -5,3 +5,22 @@ Add dbConfig.json in config folder and copy everything from dbConfig.example.jso
 Use username and password according to the username and password used in mongoDB.
 
 using node v16.16.0
+
+to install the packages:
+go to the project directory and:
+
+```
+npm i
+```
+
+then:
+
+```
+node app.js
+```
+
+or using nodemon:
+
+```
+npm start
+```
