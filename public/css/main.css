@@ -133,7 +133,7 @@ form {
 #side-menu-toggle:active,
 #side-menu-toggle:hover {
   color: red;
-  border-color: #00acc1;
+  border-color: #7c3aed;
 }
 
 .backdrop {
@@ -156,7 +156,12 @@ form {
 
 .card {
   background-color: #ccc;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border: thin solid #6d28d9;
+  box-shadow: 0 2px 8px rgb(124, 58, 237);
+}
+
+.card:hover {
+  box-shadow: 0 2px 8px rgb(124, 58, 237, 0.5);
 }
 
 .card__header,
@@ -177,6 +182,7 @@ form {
 
 .card__image img {
   width: 100%;
+  height: 100%;
 }
 
 .card__actions {
@@ -194,7 +200,7 @@ form {
   padding: 0.25rem 1rem;
   text-decoration: none;
   font: inherit;
-  border: 1px solid #00acc1;
+  border: 1px solid #7c3aed;
   color: black;
   background: white;
   border-radius: 3px;
@@ -203,7 +209,7 @@ form {
 
 .btn:hover,
 .btn:active {
-  background-color: #00acc1;
+  background-color: #7c3aed;
   color: white;
 }
 
