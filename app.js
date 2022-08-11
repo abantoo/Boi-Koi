@@ -36,5 +36,5 @@ app.use(errorController.get404);
 
 mongoConnect(() => {
   app.listen(3000);
-  console.log("Local: http://localhost:3000");
+  console.log("\x1b[35m", "Local: http://localhost:3000");
 });
