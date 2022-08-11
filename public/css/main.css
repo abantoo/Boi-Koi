@@ -191,13 +191,21 @@ form {
 }
 
 .card {
-  background-color: #ccc;
+  background-color: #e2e8f0;
   border: thin solid #6d28d9;
+  border-radius: 14px;
   box-shadow: 0 2px 8px rgb(124, 58, 237);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .card:hover {
   box-shadow: 0 2px 8px rgb(124, 58, 237, 0.5);
+}
+
+.hidden {
+  display: none;
 }
 
 .card__header,
@@ -210,15 +218,6 @@ form {
 .card__content h2,
 .card__content p {
   margin: 0;
-}
-
-.card__image {
-  width: 100%;
-}
-
-.card__image img {
-  width: 100%;
-  height: 100%;
 }
 
 .card__actions {
