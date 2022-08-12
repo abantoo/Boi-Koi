@@ -15,7 +15,9 @@ class User {
   }
 
   addToCart(book) {
-    const updateCart = { items: [{ ...book, quantity: 1 }] };
+    const updateCart = {
+      items: [{ bookID: new mongodb.ObjectId(book._id), quantity: 1 }],
+    };
     const db = getDB();
     return db
       .collection("Users")
