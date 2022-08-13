@@ -18,16 +18,6 @@ class User {
     const cartItemIndex = this.cart.items.findIndex((ci) => {
       return ci.productId.toString() === book._id.toString();
     });
-    // const updateCart = {
-    //   items: [{ productId: new mongodb.ObjectId(book._id), quantity: 1 }],
-    // };
-    // const db = getDB();
-    // return db
-    //   .collection("Users")
-    //   .updateOne(
-    //     { _id: new mongodb.ObjectId(this._id) },
-    //     { $set: { cart: updateCart } }
-    //   );
     let newQuantity = 1;
     const updatedCartItems = [...this.cart.items];
 
@@ -51,6 +41,31 @@ class User {
       )
       .then()
       .catch();
+  }
+
+  getCart() {
+    const db = getDB();
+
+    const itemIdsInCart = this.cart.items.map((index) => {
+      return index.productId;
+    });
+
+    return db
+      .collection("Books")
+      .find({ _id: { $in: itemIdsInCart } })
+      .toArray()
+      .then((items) => {
+        return products.map((newItemsArrIndex) => {
+          return {
+            ...newItemsArrIndex,
+            quantity: this.cart.items.find((index) => {
+              return (
+                index.productId.toString() === newItemsArrIndex._id.toString()
+              );
+            }).quantity,
+          };
+        });
+      });
   }
 
   static findById(userId) {
