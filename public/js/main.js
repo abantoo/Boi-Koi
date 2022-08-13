@@ -30,5 +30,5 @@ function hideFullCard() {
 
 backdrop.addEventListener("click", backdropClickHandler);
 menuToggle.addEventListener("click", menuToggleClickHandler);
-card.addEventListener("mouseover", showFullCard);
-card.addEventListener("mouseout", hideFullCard);
+// card.addEventListener("mouseover", showFullCard);
+// card.addEventListener("mouseout", hideFullCard);

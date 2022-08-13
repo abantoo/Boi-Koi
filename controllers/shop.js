@@ -14,7 +14,7 @@ exports.getProducts = (req, res, next) => {
 
 exports.getProduct = (req, res, next) => {
   const prodId = req.params.productId;
-  Product.findByID(prodId)
+  Product.findById(prodId)
     .then((product) => {
       res.render("shop/product-detail", {
         product: product,
@@ -76,14 +76,12 @@ exports.getCart = (req, res, next) => {
 };
 
 exports.postCart = (req, res, next) => {
-  const prodID = req.body.productId;
-  Product.findByID(prodID)
+  const prodId = req.body.productId;
+  Product.findById(prodId)
     .then((result) => {
       return req.user.addToCart(result);
     })
-    .then((result) => {
-      console.log(result);
-    });
+    .then((result) => {});
 
   // let fetchedCart;
   // let newQuantity = 1;
