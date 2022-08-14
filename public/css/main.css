@@ -53,7 +53,7 @@ form {
 }
 
 .image {
-  height: 15rem;
+  height: 20rem;
 }
 
 .image img {
@@ -218,6 +218,14 @@ form {
 .card__content h2,
 .card__content p {
   margin: 0;
+}
+
+.card_image {
+  width: 100%;
+}
+
+.card_image image {
+  width: 100%;
 }
 
 .card__actions {
