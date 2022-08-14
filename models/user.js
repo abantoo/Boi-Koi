@@ -1,6 +1,8 @@
 const mongodb = require("mongodb");
 const getDB = require("../util/database").getDB;
 
+const ObjectId = mongodb.ObjectId;
+
 class User {
   constructor(username, email, cart, id) {
     this.username = username;
@@ -15,19 +17,20 @@ class User {
   }
 
   addToCart(book) {
-    const cartItemIndex = this.cart.items.findIndex((ci) => {
-      return ci.productId.toString() === book._id.toString();
+    const cartProductIndex = this.cart.items.findIndex((cp) => {
+      return cp.productId.toString() === book._id.toString();
     });
     let newQuantity = 1;
     const updatedCartItems = [...this.cart.items];
 
-    if (cartItemIndex >= 0) {
-      newQuantity = this.cart.items[cartItemIndex].quantity + 1;
-      updatedCartItems[cartItemIndex].quantity = newQuantity;
+    if (cartProductIndex >= 0) {
+      newQuantity = this.cart.items[cartProductIndex].quantity + 1;
+      updatedCartItems[cartProductIndex].quantity = newQuantity;
     } else {
-      updatedCartItems.push([
-        { bookId: new mongodb.ObjectId(book._id), quantity: newQuantity },
-      ]);
+      updatedCartItems.push({
+        productId: new ObjectId(book._id),
+        quantity: newQuantity,
+      });
     }
     const updateCart = {
       items: updatedCartItems,
@@ -55,7 +58,7 @@ class User {
       .find({ _id: { $in: itemIdsInCart } })
       .toArray()
       .then((items) => {
-        return products.map((newItemsArrIndex) => {
+        return items.map((newItemsArrIndex) => {
           return {
             ...newItemsArrIndex,
             quantity: this.cart.items.find((index) => {

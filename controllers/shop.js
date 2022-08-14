@@ -52,9 +52,13 @@ exports.getCart = (req, res, next) => {
 
 exports.postCart = (req, res, next) => {
   const prodId = req.body.productId;
+  // req.user.addToCart(prodId).then((result) => {
+  //   console.log(result);
+  //   res.redirect("/cart");
+  // });
   Product.findById(prodId)
-    .then((result) => {
-      return req.user.addToCart(result);
+    .then((product) => {
+      return req.user.addToCart(product);
     })
     .then((result) => {
       res.redirect("/cart");
