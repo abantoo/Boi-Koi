@@ -52,13 +52,14 @@ exports.getCart = (req, res, next) => {
 
 exports.postCart = (req, res, next) => {
   const prodId = req.body.productId;
-  Product.findById(prodId)
-    .then((result) => {
-      return req.user.addToCart(result);
-    })
-    .then((result) => {
-      res.redirect("/cart");
-    });
+  console.log(prodId);
+  req.user.addToCart(prodId);
+  // Product.findById(prodId).then((product) => {
+  //   return req.user.addToCart(product);
+  // });
+  //   .then((result) => {
+  //     res.redirect("/cart");
+  //   });
 };
 
 exports.postCartDeleteProduct = (req, res, next) => {

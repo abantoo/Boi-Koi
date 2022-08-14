@@ -1,6 +1,8 @@
 const mongodb = require("mongodb");
 const getDB = require("../util/database").getDB;
 
+const ObjectId = mongodb.ObjectId;
+
 class User {
   constructor(username, email, cart, id) {
     this.username = username;
@@ -15,32 +17,40 @@ class User {
   }
 
   addToCart(book) {
-    const cartItemIndex = this.cart.items.findIndex((ci) => {
-      return ci.productId.toString() === book._id.toString();
-    });
-    let newQuantity = 1;
-    const updatedCartItems = [...this.cart.items];
+    // const cartItemsProductIds = this.cart.items[1].productId;
+    // const cartItemIndex = this.cart.items.find((ci) => {
+    //   return ci.productId.toString() === book._id.toString();
+    // });
 
-    if (cartItemIndex >= 0) {
-      newQuantity = this.cart.items[cartItemIndex].quantity + 1;
-      updatedCartItems[cartItemIndex].quantity = newQuantity;
-    } else {
-      updatedCartItems.push([
-        { bookId: new mongodb.ObjectId(book._id), quantity: newQuantity },
-      ]);
-    }
-    const updateCart = {
-      items: updatedCartItems,
-    };
-    const db = getDB();
-    return db
-      .collection("Users")
-      .updateOne(
-        { _id: new mongodb.ObjectId(this._id) },
-        { $set: { cart: updateCart } }
-      )
-      .then()
-      .catch();
+    // console.log(cartItemIndex);
+    // let newQuantity = 1;
+    // const updatedCartItems = [...this.cart.items];
+
+    console.log(book);
+
+    // if (cartItemIndex >= 0) {
+    //   newQuantity = this.cart.items[cartItemIndex].quantity + 1;
+    //   updatedCartItems[cartItemIndex].quantity = newQuantity;
+    // } else {
+    //   updatedCartItems.push([
+    //     {
+    //       productId: new mongodb.ObjectId(book._id),
+    //       quantity: newQuantity,
+    //     },
+    //   ]);
+    // }
+    // const updateCart = {
+    //   items: updatedCartItems,
+    // };
+    // const db = getDB();
+    // return db
+    //   .collection("Users")
+    //   .updateOne(
+    //     { _id: new mongodb.ObjectId(this._id) },
+    //     { $set: { cart: updateCart } }
+    //   )
+    //   .then()
+    //   .catch();
   }
 
   getCart() {
@@ -55,7 +65,7 @@ class User {
       .find({ _id: { $in: itemIdsInCart } })
       .toArray()
       .then((items) => {
-        return products.map((newItemsArrIndex) => {
+        return items.map((newItemsArrIndex) => {
           return {
             ...newItemsArrIndex,
             quantity: this.cart.items.find((index) => {
