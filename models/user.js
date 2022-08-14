@@ -17,40 +17,33 @@ class User {
   }
 
   addToCart(book) {
-    // const cartItemsProductIds = this.cart.items[1].productId;
-    // const cartItemIndex = this.cart.items.find((ci) => {
-    //   return ci.productId.toString() === book._id.toString();
-    // });
+    const cartProductIndex = this.cart.items.findIndex((cp) => {
+      return cp.productId.toString() === book._id.toString();
+    });
+    let newQuantity = 1;
+    const updatedCartItems = [...this.cart.items];
 
-    // console.log(cartItemIndex);
-    // let newQuantity = 1;
-    // const updatedCartItems = [...this.cart.items];
-
-    console.log(book);
-
-    // if (cartItemIndex >= 0) {
-    //   newQuantity = this.cart.items[cartItemIndex].quantity + 1;
-    //   updatedCartItems[cartItemIndex].quantity = newQuantity;
-    // } else {
-    //   updatedCartItems.push([
-    //     {
-    //       productId: new mongodb.ObjectId(book._id),
-    //       quantity: newQuantity,
-    //     },
-    //   ]);
-    // }
-    // const updateCart = {
-    //   items: updatedCartItems,
-    // };
-    // const db = getDB();
-    // return db
-    //   .collection("Users")
-    //   .updateOne(
-    //     { _id: new mongodb.ObjectId(this._id) },
-    //     { $set: { cart: updateCart } }
-    //   )
-    //   .then()
-    //   .catch();
+    if (cartProductIndex >= 0) {
+      newQuantity = this.cart.items[cartProductIndex].quantity + 1;
+      updatedCartItems[cartProductIndex].quantity = newQuantity;
+    } else {
+      updatedCartItems.push({
+        productId: new ObjectId(book._id),
+        quantity: newQuantity,
+      });
+    }
+    const updateCart = {
+      items: updatedCartItems,
+    };
+    const db = getDB();
+    return db
+      .collection("Users")
+      .updateOne(
+        { _id: new mongodb.ObjectId(this._id) },
+        { $set: { cart: updateCart } }
+      )
+      .then()
+      .catch();
   }
 
   getCart() {
