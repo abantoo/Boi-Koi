@@ -1,6 +1,6 @@
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const config = require("../config/dbConfig.json");
-const uri = `mongodb+srv://${config.username}:${config.password}@sandbox.rhg6i.mongodb.net/?retryWrites=true&w=majority`;
+
 const client = new MongoClient(uri);
 
 let _db;

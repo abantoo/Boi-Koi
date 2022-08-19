@@ -2,10 +2,11 @@ const path = require("path");
 
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
 const errorController = require("./controllers/error");
-const mongoConnect = require("./util/database").mongoConnect;
-
+const config = require("./config/dbConfig.json");
+const uri = `mongodb+srv://${config.username}:${config.password}@sandbox.rhg6i.mongodb.net/?retryWrites=true&w=majority`;
 const app = express();
 
 app.set("view engine", "ejs");
@@ -19,9 +20,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use((req, res, next) => {
-  User.findById("62f69551f82bf7ce82c52db7")
+  User.findById("62ffba8afd08be870f1d8769")
     .then((user) => {
-      req.user = new User(user.name, user.email, user.cart, user._id);
+      req.user = user;
       next();
     })
     .catch((err) => {
@@ -31,10 +32,24 @@ app.use((req, res, next) => {
 
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
-
 app.use(errorController.get404);
 
-mongoConnect(() => {
-  app.listen(3000);
-  console.log("\x1b[35m", "Local: http://localhost:3000");
-});
+mongoose
+  .connect(uri)
+  .then((result) => {
+    User.findOne().then((result) => {
+      if (!result) {
+        const user = new User({
+          name: "Palpatine",
+          email: "palpatine@sith.empire",
+          cart: {
+            items: [],
+          },
+        });
+        user.save();
+      }
+    });
+    app.listen(3000);
+    console.log("\x1b[35m", "Local: http://localhost:3000");
+  })
+  .catch((error) => console.log(error));
