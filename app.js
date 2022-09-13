@@ -49,7 +49,11 @@ mongoose
         user.save();
       }
     });
-    app.listen(3000);
-    console.log("\x1b[35m", "Local: http://localhost:3000");
+    const server = app.listen(3000, () =>
+      console.log(
+        "\x1b[35m",
+        `Local:  http://localhost:${server.address().port}`
+      )
+    );
   })
   .catch((error) => console.log(error));

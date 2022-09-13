@@ -74,8 +74,10 @@ form {
 
 .main-header__nav {
   height: 100%;
-  display: none;
+  display: flex;
+  width: 100%;
   align-items: center;
+  justify-content: space-between;
 }
 
 .main-header__item-list {
