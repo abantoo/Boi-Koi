@@ -1,4 +1,5 @@
 {
   "username": "your username",
-  "password": "your password"
+  "password": "your password",
+  "cluster": "clusterAddress.mongodb.net/"
 }

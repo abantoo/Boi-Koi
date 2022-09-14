@@ -3,10 +3,12 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const session = require("express-session");
 
 const errorController = require("./controllers/error");
-const config = require("./config/dbConfig.json");
-const uri = `mongodb+srv://${config.username}:${config.password}@sandbox.rhg6i.mongodb.net/?retryWrites=true&w=majority`;
+const dbConfig = require("./config/dbConfig.json");
+const serverConfig = require("./config/serverConfig.json");
+const uri = `mongodb+srv://${dbConfig.username}:${dbConfig.password}@${dbConfig.cluster}?retryWrites=true&w=majority`;
 const app = express();
 
 app.set("view engine", "ejs");
@@ -20,6 +22,13 @@ const User = require("./models/user");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  session({
+    secret: serverConfig.secret,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 app.use((req, res, next) => {
   User.findById("62ffba8afd08be870f1d8769")
